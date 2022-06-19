@@ -21,15 +21,15 @@ class Configuration implements ConfigurationInterface {
 
     $rootNode
       ->children()
-        ->arrayNode('password_policy')->info('Password policy configuration.')
+        ->arrayNode('password_policy')->info('Password policy configuration.')->addDefaultsIfNotSet()
           ->children()
-            ->arrayNode('previous_passwords')
+            ->arrayNode('previous_passwords')->addDefaultsIfNotSet()
               ->children()
                 ->scalarNode('store')->defaultValue(10)->info('The number of previous passwords to save.')->end()
                 ->scalarNode('avoid')->defaultValue(5)->info('The number of previous passwords to avoid when choosing a new password.')->end()
               ->end()
             ->end()
-            ->arrayNode('require_change')
+            ->arrayNode('require_change')->addDefaultsIfNotSet()
               ->children()
                 ->scalarNode('latest')->defaultValue(180)->info('The number of days a password stays valid.')->end()
                 ->scalarNode('remind')->defaultValue(170)->info('The number of days the user is reminded after the last password change.')->end()

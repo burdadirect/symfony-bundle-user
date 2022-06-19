@@ -26,6 +26,13 @@ class UserPasswordPolicyHelper {
   }
 
   /**
+   * @return int
+   */
+  public function getNumOfPreviousPasswordsToStore(): int {
+    return $this->config['previous_passwords']['store'];
+  }
+
+  /**
    * @param UserPasswordPolicy $user
    * @param string $password
    * @param int $num

@@ -9,9 +9,11 @@ services:
     ############################################################################
 
     HBM\UserBundle\Service\UserPasswordPolicyHelper:
-        alias: hbm.user.user_password_policy_helper
         arguments:
             $config: '%hbm.user.password_policy%'
+
+    hbm.user.password_policy:
+        alias: HBM\UserBundle\Service\UserPasswordPolicyHelper
 
     ############################################################################
     # VALIDATION                                                               #
