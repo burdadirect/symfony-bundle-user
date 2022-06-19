@@ -33,6 +33,20 @@ class UserPasswordPolicyHelper {
   }
 
   /**
+   * @return int
+   */
+  public function getNumOfDaysToRequirePasswordChangeLatest(): int {
+    return $this->config['require_change']['latest'];
+  }
+
+  /**
+   * @return int
+   */
+  public function getNumOfDaysToRequirePasswordChangeRemind(): int {
+    return $this->config['require_change']['remind'];
+  }
+
+  /**
    * @param UserPasswordPolicy $user
    * @param string $password
    * @param int $num
