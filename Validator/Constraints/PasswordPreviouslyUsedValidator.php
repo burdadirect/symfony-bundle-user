@@ -12,15 +12,6 @@ class PasswordPreviouslyUsedValidator extends ConstraintValidator {
 
   use UserPasswordPolicyHelperDependencyTrait;
 
-  private array $config;
-
-  /**
-   * @param array $config
-   */
-  public function __construct(array $config) {
-    $this->config = $config;
-  }
-
   /**
    * @param mixed $value
    * @param Constraint $constraint
@@ -40,12 +31,10 @@ class PasswordPreviouslyUsedValidator extends ConstraintValidator {
       return null;
     }
 
-    $previousPasswordsAvoid = $this->config['previous_passwords']['avoid'];
-
-    if ($this->passwordPolicyHelper->wasPasswordPreviouslyUsed($value, $value->getPlainPassword(), $previousPasswordsAvoid)) {
+    if ($this->userPasswordPolicyHelper->wasPasswordPreviouslyUsed($value, $value->getPlainPassword())) {
       $this->context->buildViolation(PasswordPreviouslyUsed::$message)
         ->atPath('plainPassword')
-        ->setParameter('{{ num }}', $previousPasswordsAvoid)
+        ->setParameter('{{ num }}', $this->userPasswordPolicyHelper->getNumOfPreviousPasswordsToAvoid())
         ->addViolation();
 
       return false;

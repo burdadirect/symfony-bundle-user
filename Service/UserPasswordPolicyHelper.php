@@ -3,13 +3,39 @@
 namespace HBM\UserBundle\Service;
 
 use HBM\UserBundle\Entity\Interfaces\UserPasswordPolicy;
+use HBM\UserBundle\Traits\ServiceDependencies\PasswordHasherFactoryDependencyTrait;
 
 class UserPasswordPolicyHelper {
 
-  use \HBM\UserBundle\Traits\ServiceDependencies\PasswordHasherFactoryDependencyTrait;
+  use PasswordHasherFactoryDependencyTrait;
 
-  public function wasPasswordPreviouslyUsed(UserPasswordPolicy $user, string $password, int $num = 5): bool {
+  private array $config;
+
+  /**
+   * @param array $config
+   */
+  public function __construct(array $config) {
+    $this->config = $config;
+  }
+
+  /**
+   * @return int
+   */
+  public function getNumOfPreviousPasswordsToAvoid(): int {
+    return $this->config['previous_passwords']['avoid'];
+  }
+
+  /**
+   * @param UserPasswordPolicy $user
+   * @param string $password
+   * @param int $num
+   *
+   * @return bool
+   */
+  public function wasPasswordPreviouslyUsed(UserPasswordPolicy $user, string $password, ?int $num = null): bool {
     $passwordHasher = $this->passwordHasherFactory->getPasswordHasher($user);
+
+    $num = $num ?? $this->getNumOfPreviousPasswordsToAvoid();
 
     $passwordsPreviousData = array_slice($user->getPasswordsPrevious(), -$num);
     foreach ($passwordsPreviousData as $passwordPreviousData) {

@@ -6,17 +6,17 @@ use HBM\UserBundle\Service\UserPasswordPolicyHelper;
 
 trait UserPasswordPolicyHelperDependencyTrait {
 
-  protected UserPasswordPolicyHelper $passwordPolicyHelper;
+  protected UserPasswordPolicyHelper $userPasswordPolicyHelper;
 
   /**
    * @required
    *
-   * @param UserPasswordPolicyHelper $passwordPolicyHelper
+   * @param UserPasswordPolicyHelper $userPasswordPolicyHelper
    *
    * @return void
    */
-  public function setPasswordPolicyHelper(UserPasswordPolicyHelper $passwordPolicyHelper): void {
-    $this->passwordPolicyHelper = $passwordPolicyHelper;
+  public function setUserPasswordPolicyHelper(UserPasswordPolicyHelper $userPasswordPolicyHelper): void {
+    $this->userPasswordPolicyHelper = $userPasswordPolicyHelper;
   }
 
 }
