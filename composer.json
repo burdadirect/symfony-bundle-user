@@ -1,0 +1,32 @@
+{
+  "name": "burdadirect/symfony-bundle-user",
+  "description": "HBM User Bundle - User handling (password change policies, user exceptions).",
+  "authors" : [{
+    "name" : "Christian Puchinger",
+    "email" : "christian.puchinger@burda.com"
+  }],
+  "license": "MIT",
+  "type": "symfony-bundle",
+  "autoload": {
+    "psr-4": {
+      "HBM\\UserBundle\\": ""
+    }
+  },
+  "require": {
+    "php": "^7.4.0",
+    "symfony/config": "^5.4",
+    "symfony/console": "^5.4",
+    "symfony/dependency-injection": "^5.4",
+    "symfony/framework-bundle": "^5.4",
+    "symfony/http-kernel": "^5.4",
+    "symfony/security-bundle": "^5.4",
+    "symfony/validator": "^5.4"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
+
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

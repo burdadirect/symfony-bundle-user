@@ -1,0 +1,22 @@
+services:
+    _defaults:
+        public: false
+        autowire: true
+
+    ############################################################################
+    # SERVICES                                                                 #
+    ############################################################################
+
+    HBM\UserBundle\Service\UserPasswordPolicyHelper:
+        alias: hbm.user.user_password_policy_helper
+
+
+    ############################################################################
+    # VALIDATION                                                               #
+    ############################################################################
+
+    HBM\UserBundle\Validator\Constraints\PasswordPreviouslyUsedValidator:
+        arguments:
+            $config: '%hbm.user.password_policy%'
+        tags:
+            - { name: validator.constraint_validator }

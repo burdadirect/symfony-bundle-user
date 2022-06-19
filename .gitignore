@@ -1,0 +1,11 @@
+# COMPOSER
+/composer.phar
+/vendor/
+
+
+# PHPSTORM
+/.idea/*
+
+
+# MacOS
+.DS_Store
