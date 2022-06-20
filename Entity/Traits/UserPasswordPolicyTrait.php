@@ -115,12 +115,41 @@ trait UserPasswordPolicyTrait {
 
   /****************************************************************************/
 
+  /**
+   * @return bool
+   */
   public function isPasswordReset(): bool {
     return !$this->getPassword();
   }
 
+  /**
+   * @return bool
+   */
   public function isPasswordLegacy(): bool {
     return strpos($this->getPassword(), '$') !== 0;
+  }
+
+  /**
+   * @throws \Exception
+   */
+  public function getStatePassword(int $daysExpire, int $daysRemind): string {
+    if ($this->isPasswordReset()) {
+      return 'reset';
+    }
+
+    if ($this->isPasswordLegacy()) {
+      return 'legacy';
+    }
+
+    if ($this->shouldPasswordChange($daysExpire)) {
+      return 'expired';
+    }
+
+    if ($this->shouldPasswordChange($daysRemind)) {
+      return 'about to expire';
+    }
+
+    return 'ok';
   }
 
 }
