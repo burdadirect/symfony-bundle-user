@@ -5,6 +5,7 @@ namespace HBM\UserBundle\Entity\Traits;
 /**
  * @method string toJsonValue($value, bool $associative = false, bool $unique = false, callable $callback = null)
  * @method array fromJsonValue($value, $default = [])
+ * @method string|null getPassword()
  */
 
 trait UserPasswordPolicyTrait {
@@ -110,6 +111,16 @@ trait UserPasswordPolicyTrait {
    */
   public function shouldPasswordChange(int $days): bool {
     return $this->getPasswordChanged() < new \DateTime('-'.$days.'days');
+  }
+
+  /****************************************************************************/
+
+  public function isPasswordReset(): bool {
+    return !$this->getPassword();
+  }
+
+  public function isPasswordLegacy(): bool {
+    return strpos($this->getPassword(), '$') !== 0;
   }
 
 }
