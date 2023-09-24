@@ -10,36 +10,36 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
  */
-class Configuration implements ConfigurationInterface {
+class Configuration implements ConfigurationInterface
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function getConfigTreeBuilder(): TreeBuilder
+    {
+        $treeBuilder = new TreeBuilder('hbm_user');
+        $rootNode    = $treeBuilder->getRootNode();
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getConfigTreeBuilder(): TreeBuilder {
-    $treeBuilder = new TreeBuilder('hbm_user');
-    $rootNode = $treeBuilder->getRootNode();
-
-    $rootNode
-      ->children()
-        ->arrayNode('password_policy')->info('Password policy configuration.')->addDefaultsIfNotSet()
+        $rootNode
           ->children()
-            ->arrayNode('previous_passwords')->addDefaultsIfNotSet()
+            ->arrayNode('password_policy')->info('Password policy configuration.')->addDefaultsIfNotSet()
               ->children()
-                ->scalarNode('store')->defaultValue(10)->info('The number of previous passwords to save.')->end()
-                ->scalarNode('avoid')->defaultValue(5)->info('The number of previous passwords to avoid when choosing a new password.')->end()
+                ->arrayNode('previous_passwords')->addDefaultsIfNotSet()
+                  ->children()
+                    ->scalarNode('store')->defaultValue(10)->info('The number of previous passwords to save.')->end()
+                    ->scalarNode('avoid')->defaultValue(5)->info('The number of previous passwords to avoid when choosing a new password.')->end()
+                  ->end()
+                ->end()
+                ->arrayNode('require_change')->addDefaultsIfNotSet()
+                  ->children()
+                    ->scalarNode('latest')->defaultValue(180)->info('The number of days a password stays valid.')->end()
+                    ->scalarNode('remind')->defaultValue(170)->info('The number of days the user is reminded after the last password change.')->end()
+                  ->end()
+                ->end()
               ->end()
             ->end()
-            ->arrayNode('require_change')->addDefaultsIfNotSet()
-              ->children()
-                ->scalarNode('latest')->defaultValue(180)->info('The number of days a password stays valid.')->end()
-                ->scalarNode('remind')->defaultValue(170)->info('The number of days the user is reminded after the last password change.')->end()
-              ->end()
-            ->end()
-          ->end()
-        ->end()
-      ->end();
+          ->end();
 
-    return $treeBuilder;
-  }
-
+        return $treeBuilder;
+    }
 }

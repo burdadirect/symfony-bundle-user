@@ -2,10 +2,11 @@
 /composer.phar
 /vendor/
 
-
 # PHPSTORM
 /.idea/*
 
-
 # MacOS
 .DS_Store
+
+# PHP-CS-Fixer
+.php-cs-fixer.cache
