@@ -26,7 +26,7 @@
     "symfony/framework-bundle": "^7.0",
     "symfony/http-kernel": "^7.0",
     "symfony/security-bundle": "^7.0",
-    "symfony/validator": "^7.0"
+    "symfony/validator": "^7.4"
   },
   "require-dev": {
     "burdadirect/codestyle": "dev-main",
