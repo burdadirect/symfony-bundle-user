@@ -2,14 +2,13 @@
 
 namespace HBM\UserBundle\Validator\Constraints;
 
-use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 class PasswordPreviouslyUsed extends Constraint
 {
     public static string $message = 'Das Passwort wurde zuvor bereits genutzt. Das Passwort sollte sich von den letzten {{ num }} Passwörtern unterscheiden.';
 
-    #[HasNamedArguments]
+//    #[HasNamedArguments]
     public function __construct(?array $options = null, ?array $groups = null, mixed $payload = null)
     {
         if (\is_array($options)) {
