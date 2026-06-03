@@ -36,7 +36,7 @@ class UserPasswordPolicyHelper
         return $this->config['require_change']['remind'];
     }
 
-    public function wasPasswordPreviouslyUsed(UserPasswordPolicy $user, string $password, int $num = null): bool
+    public function wasPasswordPreviouslyUsed(UserPasswordPolicy $user, string $password, ?int $num = null): bool
     {
         $passwordHasher = $this->passwordHasherFactory->getPasswordHasher($user);
 
