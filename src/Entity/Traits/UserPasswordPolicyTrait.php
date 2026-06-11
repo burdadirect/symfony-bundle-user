@@ -63,7 +63,7 @@ trait UserPasswordPolicyTrait
         return $this->fromJsonValue($this->getPasswordsPreviousJson());
     }
 
-    public function addPasswordPrevious(string $passwordPrevious, int $keep = null): self
+    public function addPasswordPrevious(string $passwordPrevious, ?int $keep = null): self
     {
         $passwordsPrevious   = $this->getPasswordsPrevious();
         $passwordsPrevious[] = [
